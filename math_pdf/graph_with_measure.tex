@@ -54,11 +54,12 @@
 %英語で定義や定理を書きたい場合こっちのコードを使うこと.
 
 \newtheorem{Axiom+}{Axiom}[section]
-\newtheorem[S]{Definition+}[Axiom+]{Definition}
+\newtheorem*[S]{Definition+}[Axiom+]{Definition}
 \newtheorem[S]{Theorem+}[Axiom+]{Theorem}
-\newtheorem{Proposition+}[Axiom+]{Proposition}
+\newtheorem[S]{Proposition+}[Axiom+]{Proposition}
 \newtheorem{Lemma+}[Axiom+]{Lemma}
 \newtheorem{Example+}[Axiom+]{Example}
+\newtheorem[S]{newch+}{Newcharactor}
 \newtheorem{Corollary+}[Axiom+]{Corollary}
 \newtheorem{Claim+}[Axiom+]{Claim}
 \newtheorem{Property+}[Axiom+]{Property}
@@ -91,26 +92,191 @@
 \newcommand{\dl}{\delta}
 \newcommand{\pphi}{\varphi}
 \newcommand{\ti}{\tilde}
+
+\makeatletter
+\def\thickhrulefill{\leavevmode \leaders \hrule height 1pt\hfill \kern \z@}
+\renewcommand{\maketitle}{\begin{titlepage}%
+    \let\footnotesize\small
+    \let\footnoterule\relax
+    \parindent \z@
+    \reset@font
+    \null\vfil
+    \hrule height 4pt
+    \vskip 10\p@
+      \LARGE 
+      \strut \@title \par
+    \begin{flushright}
+      \vskip 30\p@
+      \strut \@author
+    \end{flushright}
+    \vskip 5\p@
+    \hrule height 4pt
+    \vfil
+    \begin{flushright}
+        {\small \@date}%
+    \end{flushright}
+  \end{titlepage}%
+  \setcounter{footnote}{0}%
+}
+\makeatother
+
+
+
 \title{グラフと測度}
 \author{やたか}
 \date{}
 \begin{document}
 \maketitle
-本pdfは THE IHARA ZETA FUNCTION FOR INFINITE GRAPHS の前半部分をまとめたものである.
+本pdfは THE IHARA ZETA FUNCTION FOR INFINITE GRAPHS の前半部分をまとめたものである.\footnote{これは1ヶ月1pdfの2019年3月分である.}
 \tableofcontents
 \section{グラフ}
+測度の話をする前にグラフに関する事項を定義する.
 \begin{Definition+}[グラフ]
     グラフ(Graph)とは空でない集合$V$と$V\times V$の部分集合$E$の組$G = (V, E)$で以下のことを満たすものの
     ことである. 
     \begin{enumerate}
         \item $(x, y)\in E$ならば$(y, x)\in E$
         \item $(x, x)\in E$となる$x\in V$が存在しない.
-        \item 任意の$x\in V$に対して$\{y\in V ~|~ (x, y)\in E\}$の濃度を抑える(bounded)ような
-              $D >0$が存在する.
+        \item ある$D >0$が存在して, 任意の$x\in V$に対して$\{y\in V ~|~ (x, y)\in E\}$の濃度が$D$で抑えられる(bounded).
     \end{enumerate}
     $V$の元は頂点(vertex)と呼び, $E$の元を辺(edge)と呼ぶ.
 \end{Definition+}
 \begin{Definition+}[rooted graph]
     $G = (V, E)$をグラフとする. $x\in V$と$G$の組$(G, x)$を rooted graph と呼び, $x$を$G$の root と呼ぶ.
 \end{Definition+}
+\begin{Definition+}[始点と終点]
+    $G = (V, E)$をグラフとする. $(x, y) = e\in E$とする. この時$x\sim y$と書き, $x = o(e)$を
+    $e$の始点(origin vertex)と呼び, $y = o(e)$を$e$の終点(terminal vertex)と呼ぶ
+\end{Definition+}
+\newpage
+\begin{Definition+}[隣接]
+    $G = (V, E)$をグラフとする. $e, f\in E$が隣接(incident)しているとは
+    \begin{align*}
+        \{o(e), t(e)\}\cap \{o(f), t(f)\}
+    \end{align*}
+    の元の個数がただ1つになることである.
+\end{Definition+}
+\begin{Definition+}[degree]
+    $G = (V, E)$をグラフとする. 頂点$x\in V$の degree とは$v$を始点とする辺の個数のことである. これを
+    $deg(x)$と表す. またグラフの定義より $deg$は$V$から$\Z_{\geq 0}$への写像である. 
+\end{Definition+}
+\begin{Definition+}[道と長さ]
+    $G = (V, E)$をグラフとする. 道(path)$~P$とは辺の有限列$(e_{1}, e_{2}, \cdots, e_{n})$で, 任意の$i\in\{0, 1, \cdots, n-1\}$について
+    $o(e_{i + 1}) = t(e_{i})$を満たすもののことである. この時の$n$をパス$P$の長さ(length)といい$\ell(P)$と表記する.
+\end{Definition+}
+\begin{Definition+}[連結]
+    $G = (V, E)$をグラフとする. 頂点$x, y$が連結(connected)であるとは, 道$P$で
+    $o(e_{1}) = x$, $t(e_{n}) = y$を満たすものが存在することである.
+\end{Definition+}
+\begin{Definition+}[組み合わせ距離]
+    $G = (V, E)$をグラフとし$x, y$を$G$の頂点とする. この時$x$と$y$の組み合わせ距離(combinatorial distance)を
+    \begin{align*}
+        d(x, y) = 
+        \begin{cases}
+            \min\{\ell(P)~|~Pはxからyへの道\} & (xとyが連結でx\neq y)\\
+            0 & (x = y) \\
+            \infty & (otherwise)
+        \end{cases}
+    \end{align*}
+    として定義する. (ただしこれは距離の公理を満たさない.)
+\end{Definition+}
+以下$d$と書けば特に断りのない限り combinatorial distance を指すものとする.
+\begin{Definition+}[connected component]
+    $G = (V, E)$をグラフとする. この時, $V$の部分集合$C$で以下のことを満たすものを
+    $G$の connected component という.
+    \begin{align*}
+        \forall x, y\in C,~ d(x, y) < \infty
+    \end{align*}  
+    また, $x, y$ が同じ connected component に含まれていることを$x\approx y$と表記し, $x\in V$に対して$x$と連結する$V$の元の集合を$V(x)$で表す.
+\end{Definition+}
+$V(x)$は明らかに$G$の connected component である.
+\newpage
+\begin{Proposition+}
+    $G = (V, E)$をグラフとする. $G$の connected component は connected である. 
+\end{Proposition+}
+\begin{Definition+}[部分グラフ]
+    $G = (V, E)$をグラフとする. $V$の部分集合$V^{,}$と$E$の部分集合$E^{,}$の組
+    $G^{'} = (V^{,}, E^{,})$を$G$の部分グラフ(subgraph)という.
+\end{Definition+}
+\begin{Definition+}[誘導部分グラフ]
+    $G = (V, E)$ をグラフとする. Gの$x\in V$の誘導部分ラフ(induced subgraph)を
+    \begin{align*}
+        G(x) = (V(x), E\cup [V(x)\times V(x)])
+    \end{align*}
+    と定義する.
+\end{Definition+}
+ここで記号の導入をする.\\
+任意の$r\in\N$に対してグラフ$G = (V, E)$によって誘導されるグラフ$B_{r}^{G}(x) (x\in V)$を以下で定義する.
+\begin{align*}
+    B_{r}^{G}(x) = \{y\in V~|~ d(x, y) < r\}
+\end{align*}
+\begin{Definition+}[半径]
+    $(G, x)$を finite rooted graph とする. $(G, x)$を半径(radius)とは$x$と$a\in V$の距離の最大値であり, $\delta(G, x)$と表記する. すなわち
+    \begin{align*}
+        \delta(G, x) =\max\{d(y, x)~|~ y\in V\}
+    \end{align*}
+     である.
+\end{Definition+}
+\begin{Definition+}[積空間]
+    $G = (V, E)$をグラフとする. $V$の積空間(product space)$~V_{G}^{(2)}$を以下で定義する.
+    \begin{align*}
+        V_{G}^{(2)} := \{(x, y)~|~ G(x) = G(y)\}\subset V\times V
+    \end{align*}
+    また, グラフ$G$が文脈から明らかな時は単に$V^{(2)}$と表記する.
+\end{Definition+}
+\begin{Definition+}[隣接行列]
+    $G = (V, E)$をグラフとする. $V^{(2)}$から$\{0, 1\}$の標準写像$a_{G}$(canonical function)を以下で定義する.
+    \begin{align*}
+        a_{G}(x, y) = 
+        \begin{cases}
+            1 & x\sim y\\
+            0 & otherwise
+        \end{cases}
+    \end{align*}
+    この時$a_{G}$を$G$の隣接行列(adjacency matrix)と呼ぶ.\\x
+\end{Definition+}
+\begin{Proposition+}
+    $G = (V, E)$をグラフとし, $a_{G}: V^{(2)}\to \{0, 1\}$を$G$の隣接行列とする. この時
+    \begin{align*}
+        a_{G}^{-1}(\{1\}) = E
+    \end{align*}
+    が成立する.
+\end{Proposition+}
+\begin{proof}
+    ($\subset$) 任意に$a_{G}^{-1}(\{1\})$の元$(x, y)$をとる. 定義より
+    $a_{G}((x, y)) = 1$であるので$x\sim y$. したがって$(x, y)\in E$ 
+    が言える.\\
+    ($\supset$) 任意に$E$の元$(x, y)$をとる. 定義より$x\sim y$だから隣接行列の定義より
+    $a_{G}((x, y)) = 1$. したがって$(x, y)\in a_{G}^{-1}(\{1\})$. 
+\end{proof}
+\begin{Definition+}[グラフの同型]
+    $G_{1} = (V_{1}, E_{1})$, $G_{2} = (V_{2}, E_{2})$をグラフとする.
+    $G_{1}$と$G_{2}$が同型(isomorphic)であると$G_{1}$から$G_{2}$への全単射な写像$\phi$で以下のことが成立するものが存在することである.
+    \begin{align*}
+        x\sim y\implies \phi(x)\sim \phi(y)
+    \end{align*}
+    なお, またこのような$\phi$をグラフ同型写像(graph isomorphism)という.
+\end{Definition+}
+\begin{Definition+}[finite rooted graphの同型]
+    $(G_{1}, x_{1})$, $(G_{2}, x_{2})$を finite rooted graph とする. $(G_{1}, x_{1})$と$(G_{2}, x_{2})$
+    が同型とは, $G_{1}$から$G_{2}$へのグラフ同型写像$\phi$で$\phi(x_{1}) = \phi(x_{2})$を満たすものが存在することである.
+\end{Definition+}
+\begin{Theorem+}
+    finite rooted graph におけるグラフ同型写像は同値関係となる.
+\end{Theorem+}
+$r\geq 0$とする. $A_{r}^{D}$を各頂点のdegreeが$D$以下であり, 半径が$r$の finite rooted graph の同値類の集合とする.
+また, $A^{D}$を$r\geq 0$の$A_{r}^{D}$のunionとする. すなわち
+\begin{align*}
+    A^{D} = \bigcup_{r\geq 0} A_{r}^{D}
+\end{align*}
+ここで, degree の有界性より次の命題が成立する.
+\begin{Proposition+}
+    $A^{D}$は可算集合である.
+\end{Proposition+}
+\newpage
+\section{測度とグラフ}
+ここから先は測度論と位相空間論の知識を仮定する. この節の目標は可測グラフを定義しその諸性質を述べることである.
+\begin{thebibliography}{10}
+    \bibitem{キー1} https://arxiv.org/pdf/1408.3522.pdf ・ THE IHARA ZETA FUNCTION FOR INFINITE GRAPHS 
+\end{thebibliography}
 \end{document}

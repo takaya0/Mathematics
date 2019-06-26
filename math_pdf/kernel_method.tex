@@ -1,0 +1,109 @@
+\documentclass[11pt, a4paper, dvipdfmx]{jsarticle}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage[psamsfonts]{amssymb}
+\usepackage{color}
+\usepackage{ascmac}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{fancybox}
+\usepackage{enumerate}
+\usepackage{verbatim}
+\usepackage{subfigure}
+\usepackage{proof}
+\usepackage{listings}
+\usepackage{otf}
+
+\theoremstyle{definition}
+
+%
+%%%%%%%%%%%%%%%%%%%%%%
+%ここにないパッケージを入れる人は，必ずここに記載すること.
+%
+%%%%%%%%%%%%%%%%%%%%%%
+%ここからはコード表です.
+%
+
+
+%英語で定義や定理を書きたい場合こっちのコードを使うこと.
+
+\newtheorem{Axiom+}{Axiom}[section]
+\newtheorem{Definition+}[Axiom+]{Definition}
+\newtheorem{Theorem+}[Axiom+]{Theorem}
+\newtheorem{Proposition+}[Axiom+]{Proposition}
+\newtheorem{Lemma+}[Axiom+]{Lemma}
+\newtheorem{Example+}[Axiom+]{Example}
+\newtheorem{Corollary+}[Axiom+]{Corollary}
+\newtheorem{Claim+}[Axiom+]{Claim}
+\newtheorem{Property+}[Axiom+]{Property}
+\newtheorem{Attention+}[Axiom+]{Attention}
+\newtheorem{Question+}[Axiom+]{Question}
+\newtheorem{Problem+}[Axiom+]{Problem}
+\newtheorem{Consideration+}[Axiom+]{Consideration}
+\newtheorem{Alert+}{Alert}
+
+%commmand
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\W}{{\cal W}}
+\newcommand{\cS}{{\cal S}}
+\newcommand{\Wpm}{W^{\pm}}
+\newcommand{\Wp}{W^{+}}
+\newcommand{\Wm}{W^{-}}
+\newcommand{\p}{\partial}
+\newcommand{\Dx}{D_{x}}
+\newcommand{\Dxi}{D_{\xi}}
+\newcommand{\lan}{\langle}
+\newcommand{\ran}{\rangle}
+\newcommand{\pal}{\parallel}
+\newcommand{\dip}{\displaystyle}
+\newcommand{\e}{\varepsilon}
+\newcommand{\dl}{\delta}
+\newcommand{\pphi}{\varphi}
+\newcommand{\ti}{\tilde}
+\title{Kernel method}
+\author{yataka}
+\date{}
+\begin{document}
+\maketitle
+\section{Functional Analysis}
+\begin{Definition+}(vector space)\\
+    Let $K$, $\R$ be a field and a set with two operations, addition and scalar multiplication.
+    If $V$ statisfies
+    \begin{enumerate}
+        \item $V$ becomes commutative group by addition,
+        \item $\forall\alpha\in\K, \forall u, v\in V, e\alpha(u + v) = \alpha u + \alpha v$,
+        \item $\forall \alpha, \beta\in\K, \forall v\in V, (\alpha + \beta)v = \alpha v + \beta v$,
+        \item $\forall \alpha, \beta\in\K, \forall v\in V, \alpha(\beta v) = (\alpha\beta)v$ and 
+        \item $\exists 1_{\K}\in\K~\text{ s.t. }\forall v\in V, 1_{\K}v = v$.
+    \end{enumerate}
+    Then, $V$ is called $\mathbf{vector~space}$ over $\K$.
+\end{Definition+}
+We consider only real verctor space or complex vector space in this article. So, 
+$\K = \R$ or $\K = \C$.
+\begin{Definition+}(normed vector space)\\
+    Let $V$, $\|\cdot\|$ be a vector space over $\K$ and a map from $V\times V$ to $\K$.
+    $\|\cdot\|$ is called $\mathbf{norm}$ on $\K$ when $\|\|$ statisfies 
+    \begin{enumerate}
+        \item $\forall v\in V, \|v\| \geq 0$,
+        \item $\forall v\in V, \|v\| = 0 \iff v = 0$,
+        \item $\forall \alpha\in\K, \forall v\in V, \|\alpha v\| = |\alpha|\|v\|$ and 
+        \item $\forall v, w\in V, \|v + w\|\leq \|v\| + \|w\|$.
+    \end{enumerate}
+    A pair $(V, \|\|)$ is called $\mathbf{normed~vector~space}$ or $\mathbf{normed~space}$
+\end{Definition+}
+\begin{Proposition+}
+    Suppose that $(V, \|\|)$ is normed space.
+    Then, norm space is metric space by a distance generated $d:V\times V\to\K$ by norm,
+    \begin{align*}
+        d(x, y) = \|x - y\|.
+    \end{align*}
+\end{Proposition+}
+\end{document}

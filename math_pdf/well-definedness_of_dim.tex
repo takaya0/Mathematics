@@ -1,0 +1,202 @@
+\documentclass[11pt, a4paper, dvipdfmx]{jsarticle}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage[psamsfonts]{amssymb}
+\usepackage{color}
+\usepackage{ascmac}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{fancybox}
+\usepackage{enumerate}
+\usepackage{verbatim}
+\usepackage{subfigure}
+\usepackage{proof}
+\usepackage{listings}
+\usepackage{otf}
+\usepackage{thmbox}
+\usepackage{amsthm}
+
+\theoremstyle{definition}
+
+%
+%%%%%%%%%%%%%%%%%%%%%%
+%ここにないパッケージを入れる人は，必ずここに記載すること.
+%
+%%%%%%%%%%%%%%%%%%%%%%
+%ここからはコード表です.
+%
+
+\newtheorem{Axiom}{公理}[section]
+\newtheorem{Definition}[Axiom]{定義}
+\newtheorem{Theorem}[Axiom]{定理}
+\newtheorem{Proposition}[Axiom]{命題}
+\newtheorem{Lemma}[Axiom]{補題}
+\newtheorem{Corollary}[Axiom]{系}
+\newtheorem{Example}[Axiom]{例}
+\newtheorem{Claim}[Axiom]{主張}
+\newtheorem{Property}[Axiom]{性質}
+\newtheorem{Attention}[Axiom]{注意}
+\newtheorem{Question}[Axiom]{問}
+\newtheorem{Problem}[Axiom]{問題}
+\newtheorem{Consideration}[Axiom]{考察}
+\newtheorem{Alert}[Axiom]{警告}
+
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+%%
+
+\newcommand{\A}{\bf 証明}
+\newcommand{\B}{\it Proof}
+
+%英語で定義や定理を書きたい場合こっちのコードを使うこと.
+
+\newtheorem{Axiom+}{Axiom}[section]
+\newtheorem[S]{Def+}[Axiom+]{Definition}
+\newtheorem[S]{Thm+}[Axiom+]{Theorem}
+\newtheorem[S]{Prop+}[Axiom+]{Proposition}
+\newtheorem[S]{Lemma+}[Axiom+]{Lemma}
+\newtheorem{Example+}[Axiom+]{Example}
+\newtheorem{Corollary+}[Axiom+]{Corollary}
+\newtheorem{Claim+}[Axiom+]{Claim}
+\newtheorem{Property+}[Axiom+]{Property}
+\newtheorem{Attention+}[Axiom+]{Attention}
+\newtheorem{Question+}[Axiom+]{Question}
+\newtheorem{Problem+}[Axiom+]{Problem}
+\newtheorem{Consideration+}[Axiom+]{Consideration}
+\newtheorem{Alert+}{Alert}
+
+%commmand
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\W}{{\cal W}}
+\newcommand{\cS}{{\cal S}}
+\newcommand{\Wpm}{W^{\pm}}
+\newcommand{\Wp}{W^{+}}
+\newcommand{\Wm}{W^{-}}
+\newcommand{\p}{\partial}
+\newcommand{\Dx}{D_{x}}
+\newcommand{\Dxi}{D_{\xi}}
+\newcommand{\lan}{\langle}
+\newcommand{\ran}{\rangle}
+\newcommand{\pal}{\parallel}
+\newcommand{\dip}{\displaystyle}
+\newcommand{\e}{\varepsilon}
+\newcommand{\dl}{\delta}
+\newcommand{\pphi}{\varphi}
+\newcommand{\ti}{\tilde}
+\title{Well-definedness of dimention}
+\author{yataka}
+\date{}
+\begin{document}
+\maketitle
+ここでは線型空間の定義と体の定義および集合と写像に関する基礎的な知識を仮定する.
+\tableofcontents
+\section{Introduction}
+線型空間には次元という概念が存在する. このpdfではそれの定義と well-defined 性を証明する. $K$を体とし, 以下の線型空間は
+全て$K$上の線型空間であるとする.
+\section{一次独立・線型従属と線型写像}
+\begin{Def+}[一次独立・線型従属]
+    $V$を線型空間とする. $V$の元$v_{1}, v_{2}, \cdots, v_{n}$が一次独立であるとは, 任意の$a_{1}, a_{2}, \cdots, a_{n}$に対して
+    \begin{align*}
+        a_{1}v_{1} + a_{2}v_{2} + \cdots + a_{n}v_{n} = 0\implies a_{1} = a_{2} = \cdots = a_{n} = 0
+    \end{align*}
+    が成立するとき $v_{1}, v_{2}, \cdots, v_{n}$は一次独立であると言い, $v_{1}, v_{2}, \cdots, v_{n}$が一次独立でないとき
+    一次従属であるという.
+\end{Def+}
+\begin{Def+}[線型写像]
+    $V$, $W$を線型空間とし, $f$を$V$から$W$への写像とする. 以下のことが成り立つとき
+    $f$を線型写像という
+    \begin{enumerate}
+        \item $\forall x, y\in V,~f(x + y) = f(x) + f(y)$
+        \item $\forall x\in V, \forall a\in K,~f(ax) = af(x)$
+    \end{enumerate}
+\end{Def+}
+なお, 線形写像についてはいくつかの同値な命題が存在する.
+\begin{Prop+}
+    $V$, $W$を線型空間とし, $f$を$V$から$W$への写像とする. このとき以下の命題は同値である.
+    \begin{enumerate}
+        \item $f$ は線形写像である.
+        \item $\forall x, y\in V, \forall a\in K,~ f(ax + y) = af(x) + f(y)$
+        \item $\forall x, y\in V, \forall a, b\in K,~ f(ax + by) = af(x) + bf(y)$
+    \end{enumerate}
+\end{Prop+}
+\begin{Def+}[線型同型写像・線型同型]
+    $V$, $W$を線型空間とする. $f$を$V$から$W$への写像とする. $f$が全単射かつ線形写像
+    であるとき, $f$を線型同型写像という. また$V$から$W$への線型同型写像が少なくとも
+    $1$つ存在するとき, $V$と$W$は線型同型であるといい$V\simeq W$と表記する.
+\end{Def+}
+\begin{Thm+}[線型同型の性質]
+    線型同型は同値関係である. すなわち$V$, $W$, $Z$を線型空間とすれば以下のことが成立する.
+    \begin{enumerate}
+        \item $V\simeq V$
+        \item $V\simeq W$$\implies$$W\simeq V$
+        \item $V\simeq W$, $W\simeq Z$$\implies$$V\simeq Z$
+    \end{enumerate}
+\end{Thm+}
+\section{基底と線型同型}
+\begin{Def+}[生成系]
+    $V$を線型空間とする. $v_{1}$, $v_{2}$, $\cdots$, $v_{n}$が$V$
+    の生成系であるとは以下のことが成立することである.
+    \begin{align*}
+        \forall x\in V, \exists a_{1}, a_{2}, \cdots, a_{n}\in K~s.t.~ x = a_{1}v_{1} + a_{2}v_{2} + \cdots + a_{n}v_{n} 
+    \end{align*}
+\end{Def+}
+\begin{Def+}[基底]
+    $V$を線型空間とする. $v_{1}$, $v_{2}$, $\cdots$, $v_{n}$が$V$の基底であるとは
+    $v_{1}$, $v_{2}$, $\cdots$, $v_{n}$が一次独立かつ$V$の生成系であることである.
+\end{Def+}
+\begin{Prop+}[基底の表現の一意性]
+    $V$を線型空間とし, $v_{1}$, $v_{2}$, $\cdots$, $v_{n}$を$V$の基底とする. 
+    このとき以下のことが成立する.
+    \begin{align*}
+        a_{1}v_{1} + a_{2}v_{2} + \cdots + a_{n}v_{n} = b_{1}v_{1} + b_{2}v_{2} + \cdots + b_{n}v_{n}  \implies \forall i\in\{1, 2, \cdots, n\},~ a_{i} =b_{i}
+    \end{align*}
+\end{Prop+}
+    これより次の命題が成り立つ.
+\begin{Prop+}[基底と生成系]
+    $V$を線型空間とする. このとき以下のことは同値である.
+    \begin{enumerate}
+        \item $v_{1}$, $v_{2}$, $\cdots$, $v_{n}$は$V$の基底である.
+        \item $\forall x\in V, \exists !~ a_{1}, a_{2}, \cdots, a_{n}\in K~s.t.~ x =  a_{1}v_{1} + a_{2}v_{2} + \cdots + a_{n}v_{n}$
+    \end{enumerate}
+\end{Prop+}
+\begin{Thm+}
+    $V$を線型空間とし, $v_{1}$, $v_{2}$, $\cdots$, $v_{n}$を$V$の元とする. このとき
+    以下で定義される写像$f : K^{n}\to V$が線型同型写像であることと$v_{1}$, $v_{2}$, $\cdots$, $v_{n}$が$V$の基底であることは同値である.
+    \begin{align*}
+        f((a_{1}, a_{2}, \cdots, a_{n})) =  a_{1}v_{1} + a_{2}v_{2} + \cdots + a_{n}v_{n}
+    \end{align*}
+\end{Thm+}
+\section{次元と well-defined}
+\begin{Thm+}
+    $K^{n}$と$K^{m}$が線型同型ならば$n = m$である.
+\end{Thm+}
+\begin{proof}
+    参考文献の [3.8]を参照.
+\end{proof}
+\begin{Thm+}[基底の個数の一意性]
+    $V$を線型空間とし, $v_{1}$, $v_{2}$, $\cdots$, $v_{n}$と$w_{1}$, $w_{2}$, $\cdots$, $w_{m}$を$V$の基底とする. このとき$n = m$である.
+\end{Thm+}
+\begin{proof}
+    {\bf Theorem 2.5.}と{\bf Theorem 3.5.}と{\bf Theorem 4.1.}よりいえる.
+\end{proof}
+\begin{Def+}[次元]
+    $V$を線型空間とする. $V$の基底の元の個数が有限個であるとき
+    $V$は有限次元であるという. また有限次元でないときは無限次元であるという.
+\end{Def+}
+\begin{Thm+}[有限次元の基底の存在性]
+    $V$を有限次元の線型空間とする. 有限次元の線型空間には基底が存在する.
+\end{Thm+}
+\begin{proof}
+    参考文献の p 101の定理3.4.を参照
+\end{proof}
+\begin{thebibliography}{1}
+    \bibitem{キー1} 斎藤正彦著　線形代数入門
+\end{thebibliography}
+\end{document}
