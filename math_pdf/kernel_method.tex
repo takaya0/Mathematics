@@ -56,6 +56,8 @@
 \newcommand{\Y}{\mathcal{Y}}
 \newcommand{\Hil}{\mathcal{H}}
 \renewcommand{\L}{\mathcal{L}}
+\newcommand{\Loss}{L_{D}}
+\newcommand{\MLsp}{(\X, \Y, D, \Hil, L_{D})}
 \newcommand{\W}{{\cal W}}
 \newcommand{\cS}{{\cal S}}
 \newcommand{\Wpm}{W^{\pm}}
@@ -279,4 +281,55 @@ Therefore, I show you some examples of Banach space.
     \end{align*} 
     a map $k:\X\times\X\to\K$, defined by $k(y, x) = k_{x}(y)$, is called $\mathbf{reproducing~kernel}$ of $\Hil$. 
 \end{Definition+}
+
+\section{The Principle of Machine Learning}
+Learning Theory is devided into three parts: Supervised Learning, Unsupervised Learning and Reinforcement Learning. 
+This article explains only Supervised Learning.
+Machine Learning and Deep Learning are Supervised Learning. The purpose of Supervised
+Learning is learning ''good” functions from training data. In the next subsection, I explain basic definitions of
+Firstly, we define a fundamental space of Machine Learning based on Statistical Learning theory.
+\subsection{Fundametal space }
+\begin{Definition+}(input space)\\
+    $\mathcal{X}$ $:=$ $\R^{d}$ is called $\mathbf{input~space}$.
+\end{Definition+}
+\begin{Definition+}(output space)\\
+    $\mathcal{Y}$ $:=$ $\R^{m}$ is called $\mathbf{output~space}$.
+\end{Definition+}
+\begin{Definition+}(Hypothesis space)\\
+      Let $\X$, $\Y$ be a input space and a output space respectively. $\mathbf{Hypothesis~space}$, donated $\Hil$, is a set of function from $\X$ to $\Y$ with some restrictions. i.e.
+    \begin{align*}
+        \Hil = \{f:\X\to\Y~|~f\text{ stisfy some conditions}\}
+    \end{align*}
+      A element $f$ of $\Hil$ is called $\mathbf{hypothesis}$. The detail of conditions is explained later.
+\end{Definition+}
+
+\begin{Definition+}(Data)\\
+    Let $\X$, $\Y$ be a input space and a output space respectively.
+    A finite subset of $\X\times\Y$ is called Data sequence or Data simply. Data is donated $D$.
+\end{Definition+}
+
+\begin{Definition+}(Training data and Testing data)\\
+    Data $D$ is devided into two disjoint data, Training data $S$ and Testing data $T$.
+\end{Definition+}
+\begin{Definition+}(Loss function)\\
+    Let $\Hil$ be a Hypothesis space and $D$ be data. $\mathbf{Loss~function}$, donated $L_{D}$, is function from $\Hil$ to $\R$.
+\end{Definition+}
+
+\begin{Definition+}(Machine Learning space)\\
+    Let $\X$, $\Y$, $D$, $\Hil$, $L_{D}:\Hil\to\R$ be a input space, output space, Data, Hypothesis space and Loss function respectively.
+    Then, the -5 tuple $\MLsp$ is called $\mathbf{Machine~Learning}$ $\mathbf{space}$.
+\end{Definition+}
+\begin{Definition+}(Learning)\\
+   Let $\Hil$ be a Hypothesis space and $L_{D}:\Hil\to\R$ be a loss function. A process that find a hypothesis $f_{opt}\in\Hil$ that minimalize $\{L_{D}(f)~|~f\in\Hil\}$ ~from Train data $S$ is called Learning.
+   then, $f_{opt}\in\Hil$ is called optimal hypothesis.
+\end{Definition+}
+
+\begin{Attention+}
+    Generally, $f_{opt}$ is not equal to $f_{min}$. ($f_{min}$ is argment of minimam $\{L_{D}(f)~|~f\in\Hil\}$)
+\end{Attention+}
+
+\begin{Definition+}(Machine Learning)\\
+    Let $\MLsp$ be a Machine Learning space. A learning on $\MLsp$ is called Machine Learning.
+\end{Definition+}
+  
 \end{document}
