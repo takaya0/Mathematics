@@ -331,5 +331,63 @@ Firstly, we define a fundamental space of Machine Learning based on Statistical 
 \begin{Definition+}(Machine Learning)\\
     Let $\MLsp$ be a Machine Learning space. A learning on $\MLsp$ is called Machine Learning.
 \end{Definition+}
-  
+\newpage
+\subsection{Some examples}
+Simple Regression Analysis is the most fundametal Machine Learning Model.
+\subsubsection{Setting Problem}
+I define Machine Learning space as below:
+$\X = \R$, $\Y = \R$,
+\begin{align*}
+    \Hil = \{f:\X\to\Y~|~f(x) = wx,~ w\in\R\},
+\end{align*}
+\begin{align*}
+    L_{D}(f) = \sum_{i = 1}^{N} |f(x_{i}) - t_{i}|^{2}~~~~(f\in\Hil)
+\end{align*}
+Then, Learning in this space is called Simple Regression Analysis.
+
+\subsubsection{Solution of this Problem}
+Let $f\in\Hil$ be $f(x) = wx$. then,
+\begin{eqnarray*}
+  \frac{dL}{dw} &=& \frac{d}{dw}\sum_{i = 1}^{N}(wx_{i} - t_{i})^{2}\\
+                &=& \sum_{i = 1}^{N}2x_{i}(wx_{i} - t_{i})\\
+                &=& 2\sum_{i = 1}^{N}x_{i}(wx_{i} - t_{i}) = 0
+\end{eqnarray*}
+So optimal hypothesis in this problem is
+\begin{align*}
+    f_{opt}(x) = \frac{\sum_{i = 1}^{N}x_{i}t_{i}}{\sum_{i = 1}^{N} x_{i}^{2}} x.
+\end{align*}
+
+\subsubsection{Improving this model}
+The model above has many improving points. For examples
+\begin{enumerate}
+    \item It is difficult to predict Non-Linear data.
+    \item In many case, there are more than one factor.
+\end{enumerate}
+Firstly, I think about second problem. I think of some independent reasons  as one vector.
+\subsection{Multiple Regression Analysis}
+\subsubsection{Setting problem}
+I define Machine Learning space as below: $\X = \R^{d}$, $\Y = \R$,
+\begin{align*}
+    \Hil = \{f:\X\to\Y~|~f(x) = Wx,~ W\in\R^{1\times d}\},
+\end{align*}
+\begin{align*}
+    L_{D}(f) = \sum_{i = 1}^{N} |f(x_{i}) - t_{i}|^{2}~~~~(f\in\Hil)
+\end{align*}
+Then, Learning in this space is called Multiple Regression Analysis.
+
+\subsubsection{Solution of this Problem}
+Let $X$, $w$, $t$ be $N\times d$ Input Data matrix that $i$ th row is $i$th Input data, parametor vector in $\R^{1\times d}$ and target vector in $\R^{N}$ respectively. i.e.
+\begin{align*}
+    X =
+    \left[ \begin{array}{cccc} {x_{11}} & {x_{12}} & {\dots} & {x_{1 d}} \\
+   {x_{21}} & {x_{22}} & {\dots} & {x_{2 d}} \\
+   {\vdots} & {\vdots} & {\ddots} &  {\vdots}\\
+  {x_{N 1}} & {x_{N 2}} & {\dots} & {x_{N d}}\end{array}\right],
+\end{align*}
+$t = (t_{1}, t_{2}, \cdots, t_{N})^{T}$ and $w = (w_{1}, w_{2}, \cdots, w_{d})^{T}$~ ($T$ refer Transpose of vector or matrix).\\
+Optimal hypothesis in this problem is
+\begin{align*}
+    f_{opt}(x) = ((X^{T}X)^{-1}X^{T}t)^{T}x.
+\end{align*}
+
 \end{document}
