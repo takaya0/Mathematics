@@ -95,7 +95,7 @@ $V$: vector space\\
 $(V, \|\cdot\|)$: normed space\\
 $(V, \hoge<\cdot, \cdot>)$ : inner space\\
 $\Hil$: hypothesis space or Hilbert space\\
-$\Hil_{k}$: RKHS with positive definate kernel $k$\\
+$\Hil_{k}$: RKHS with reproducing kernel $k$\\
 \section{Functional Analysis}
 \begin{Definition+}(vector space)\\
     Let $\K$, $V$ be a field and a set with two operations, addition and scalar multiplication.
@@ -279,8 +279,20 @@ Therefore, I show you some examples of Banach space.
     \begin{align*}
         \forall x\in\X, \exists k_{x}\in\Hil\text{ s.t. }\forall f\in\Hil, \hoge<f, k_{x}> = f(x).
     \end{align*} 
-    a map $k:\X\times\X\to\K$, defined by $k(y, x) = k_{x}(y)$, is called $\mathbf{reproducing~kernel}$ of $\Hil$. 
+    A map $k:\X\times\X\to\K$, defined by $k(y, x) = k_{x}(y)$, is called $\mathbf{reproducing~kernel}$ of $\Hil$. 
 \end{Definition+}
+
+\begin{Proposition+}
+    Let $\Hil_{k}$ be a RKHS. Then, the reproducing kernal of $\Hil_{k}$ is positive 
+    definate kernal and is unique. 
+    \begin{proof}
+        For every $x_{1}, x_{2}, \cdots, x_{n}\in\X$ and $c_{1}, c_{2}, \cdots, c_{n}\in\K$, 
+        \begin{eqnarray*}
+            \sum_{i = 1, j = 1}^{n}c_{i}\overline{c_{j}}k(x_{i}, x_{j}) &=& 1\\
+                                                                        &=& 2
+        \end{eqnarray*}
+    \end{proof}
+\end{Proposition+}
 
 \section{The Principle of Machine Learning}
 Learning Theory is devided into three parts: Supervised Learning, Unsupervised Learning and Reinforcement Learning. 
@@ -360,7 +372,7 @@ So optimal hypothesis in this problem is
 \subsubsection{Improving this model}
 The model above has many improving points. For examples
 \begin{enumerate}
-    \item It is difficult to predict Non-Linear data.
+    \item It is difficult to predict non linear data.
     \item In many case, there are more than one factor.
 \end{enumerate}
 Firstly, I think about second problem. I think of some independent reasons  as one vector.
@@ -390,10 +402,28 @@ Optimal hypothesis in this problem is
     f_{opt}(x) = ((X^{T}X)^{-1}X^{T}t)^{T}x.
 \end{align*}
 
-\section{Kernl method}
+\section{Kernel method}
 I showed some methods in section 4. However, these methods is for linear data. 
 If you have learned Machine Learning, You may know Neural Network for non linear data.
 However, I explain Neural Network after this section and show new method, Kernel method, for non linear data in this section. 
 
 \section{Neural Network}
+\begin{Definition+}(Shallow Neural Network for Regression)\\
+    we difine Machine Learning space as below: $\X = \R^{d}$, $\Y = \R$,
+    \begin{align*}
+        \Hil_{SNN} = \{f:\X\to\Y~|~ f(x) = W_{2} \eta\left(W_{1} x-b_{1}\right) - b_{2},~W_{1} \in \R^{L \times d}, W_{2} \in \R^{1 \times L}, b_{1} \in \R^{L}, b_{2}\in\R\},
+    \end{align*}
+    \begin{align*}
+        L(f) =  \frac{1}{N}\sum_{i = 1}^{N} |f(x_{i}) - t_{i}|^{2}
+    \end{align*}
+    ,where $\eta:\R^{L}\to\R^{L}$ is activation function, non linear and  Lipschitz continuous.
+    A element of $\Hil_{SNN}$ is called $\mathbf{Shallow~Neural~Network~for~Regression}$.
+\end{Definition+}
+\begin{thebibliography}{9}
+    \bibitem{neural} https://tutorials.chainer.org/ja/index.html
+    \bibitem{ML} https://github.com/Runnrairu/machinelearning\verb|_|text
+    \bibitem{kernel} カーネル法入門―正定値カーネルによるデータ解析・福水健次・2010
+    \bibitem{ML1} 統計的学習理論・金森 敬文・2015
+    \bibitem{functional} 函数解析 POD版・前田 周一郎・2007
+\end{thebibliography}
 \end{document}

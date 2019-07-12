@@ -1,4 +1,4 @@
-This is e-pTeX, Version 3.14159265-p3.8.0-180226-2.6 (utf8.euc) (TeX Live 2018) (preloaded format=platex 2018.7.16)  11 JUL 2019 19:24
+This is e-pTeX, Version 3.14159265-p3.8.0-180226-2.6 (utf8.euc) (TeX Live 2018) (preloaded format=platex 2018.7.16)  12 JUL 2019 14:05
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -383,18 +383,23 @@ LaTeX Font Info:    Font shape `JT1/hmc/m/it' will be
 (Font)              scaled to size 9.24683pt on input line 252.
 LaTeX Font Info:    Font shape `JY1/hmc/m/it' will be
 (Font)              scaled to size 9.24683pt on input line 252.
- [4] [5] [6] [7] (./kernel_method.aux)
+ [4] [5] [6]
+Overfull \hbox (9.12039pt too wide) detected at line 415
+[]
+ []
+
+[7] (./kernel_method.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
  ) 
 Here is how much of TeX's memory you used:
- 5597 strings out of 493281
- 70720 string characters out of 6145041
- 149592 words of memory out of 5000000
- 9464 multiletter control sequences out of 15000+600000
- 20513 words of font info for 99 fonts, out of 8000000 for 9000
+ 5604 strings out of 493281
+ 70778 string characters out of 6145041
+ 149607 words of memory out of 5000000
+ 9470 multiletter control sequences out of 15000+600000
+ 20681 words of font info for 100 fonts, out of 8000000 for 9000
  934 hyphenation exceptions out of 8191
  27i,17n,32p,342b,991s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on kernel_method.dvi (7 pages, 23672 bytes).
+Output written on kernel_method.dvi (7 pages, 26028 bytes).
